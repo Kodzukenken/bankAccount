@@ -61,6 +61,7 @@ class BankAccount
       try (BufferedWriter writer = new BufferedWriter(new FileWriter("history.txt"))) {
          // Writing data to the file
          String line = bt.toString();
+         writer.newLine();
          writer.write(line);
          writer.newLine();
 
@@ -71,25 +72,23 @@ class BankAccount
    }
 }
 
-
    public void printTabungan(){  
 
       System.out.printf("%-20s %-10s %-10s %-15s%n", "Date", "Amount", "Balance", "Type");
    System.out.println("--------------");
       for (BankTransaction bt : BTlist)
     { 
+      try (BufferedReader reader = new BufferedReader(new FileReader("history.txt"))) {
+         String line = bt.toString();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("output.txt"))) {
-            String line = bt.toString();
-
-            // Reading data from the file
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+         // Reading data from the file
+         while ((line = reader.readLine()) != null) {
+             System.out.println(line);
+         }
+     } catch (IOException e) {
+         e.printStackTrace();
+     }
       System.out.println("--------------");
+   }
    }
 }
