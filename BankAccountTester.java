@@ -19,13 +19,13 @@ public class BankAccountTester{
 
       do{  
          System.out.println("Menu");
-         System.out.printf("--------------------------");
+         System.out.println("--------------");
          System.out.println("1. Create an account");
          System.out.println("2. Deposit");
          System.out.println("3. Withdraw");
          System.out.println("4. Display Bank Book Transaction");
          System.out.println("5. Exit");
-         System.out.printf("--------------------------");
+         System.out.println("--------------");
          opt = button.nextInt();
 
       switch(opt){

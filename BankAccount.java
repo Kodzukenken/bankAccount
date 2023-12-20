@@ -57,17 +57,10 @@ class BankAccount
       String date = form.format(new Date());
       BTlist.add(new BankTransaction(date, type, amount, balance));
 
-   }
-
-   public void printTabungan(){  
-
-      System.out.printf("%-20s %-10s %-10s %-15s%n", "Date", "Amount", "Balance", "Type");
-   System.out.println("--------------");
-      for (BankTransaction bt : BTlist)
-    { 
+      for (BankTransaction bt : BTlist){
       try (BufferedWriter writer = new BufferedWriter(new FileWriter("history.txt"))) {
          // Writing data to the file
-         String line = String.format("%-15s", bt);
+         String line = bt.toString();
          writer.write(line);
          writer.newLine();
 
@@ -75,16 +68,27 @@ class BankAccount
          e.printStackTrace();
       }
 
-      //   try (BufferedReader reader = new BufferedReader(new FileReader("output.txt"))) {
-      //       String line = String.format("%-15s", bt);
+   }
+}
 
-      //       // Reading data from the file
-      //       while ((line = reader.readLine()) != null) {
-      //           System.out.println(line);
-      //       }
-      //   } catch (IOException e) {
-      //       e.printStackTrace();
-      //   }
+
+   public void printTabungan(){  
+
+      System.out.printf("%-20s %-10s %-10s %-15s%n", "Date", "Amount", "Balance", "Type");
+   System.out.println("--------------");
+      for (BankTransaction bt : BTlist)
+    { 
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("output.txt"))) {
+            String line = bt.toString();
+
+            // Reading data from the file
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
       System.out.println("--------------");
    }

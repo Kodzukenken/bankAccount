@@ -1,8 +1,8 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-class BankTransaction
-{  private String date;
+class BankTransaction{
+   private String date;
    private String typeTransaction;
    private double amountTransaksi;
    private double balanceTransaksi;
