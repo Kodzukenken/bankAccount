@@ -53,12 +53,12 @@ class BankAccount
    }
 
    private void newTransaction(double amount, String type){
-      SimpleDateFormat form = new SimpleDateFormat("MM-dd-yyyy");
+      SimpleDateFormat form = new SimpleDateFormat("MM-dd-yyyy hh:mm");
       String date = form.format(new Date());
       BTlist.add(new BankTransaction(date, type, amount, balance));
 
       for (BankTransaction bt : BTlist){
-      try (BufferedWriter writer = new BufferedWriter(new FileWriter("history.txt"))) {
+      try (BufferedWriter writer = new BufferedWriter(new FileWriter("history.txt", true))) {
          // Writing data to the file
          String line = bt.toString();
          writer.newLine();

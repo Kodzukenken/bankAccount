@@ -17,7 +17,8 @@ public class BankAccountTester{
       BankAccount acc = new BankAccount(amt, name, address); 
       
 
-      do{  
+      do{ 
+         System.out.println("--------------"); 
          System.out.println("Menu");
          System.out.println("--------------");
          System.out.println("1. Create an account");
