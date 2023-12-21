@@ -1,12 +1,10 @@
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 class BankTransaction{
    private String date;
    private String typeTransaction;
    private double amountTransaksi;
    private double balanceTransaksi;
-   private String info;
+   public String info;
 
    public BankTransaction(String date, String typeT, double amountT, double balanceT, String info)
    { 

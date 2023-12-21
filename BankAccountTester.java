@@ -13,7 +13,7 @@ public class BankAccountTester{
       System.out.println("Enter your initial balance: ");
       amt = button.nextInt();
       BankAccount account1 = new BankAccount(amt, name);
-      BankAccount account2 = new BankAccount(amt, rec);
+      BankAccount account2 = new BankAccount(0, "Komi");
       account1.addAccount(name, amt);
       
 
@@ -41,7 +41,7 @@ public class BankAccountTester{
             button.nextLine();
             System.out.println("Enter your initial balance: ");
             amt = button.nextInt();
-            account2.addAccount(name, amt);
+            account2.addAccount(rec, amt);
       break;
          case 2:
          // Deposit
@@ -64,10 +64,9 @@ public class BankAccountTester{
             amt = button.nextInt();
             button.nextLine();
             System.out.println("Please enter transfer information: ");
-            info = button.nextLine();
-            button.nextLine();
+            info = button.nextLine().trim();
 
-            account1.transfer(amt, rec, info);
+            account1.transfer(amt, account2, info);
       break;
          case 5:
          //Printing transaction history

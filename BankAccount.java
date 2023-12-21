@@ -13,6 +13,7 @@ class BankAccount
    private double balance;;
    private ArrayList<BankTransaction> BTlist = new  ArrayList<BankTransaction>();
    private ArrayList<BankAccount> AccList = new ArrayList<BankAccount>();
+   
    public BankAccount()
    {   
       balance = 0;
@@ -28,48 +29,41 @@ class BankAccount
    }
 
    public void deposit(double amount){
-      String info = null;
       this.balance += amount;
-      newTransaction(amount, "Deposit", info);
+      newTransaction(amount, "n/a", "Deposit");
    } 
 
    public void withdraw(double amount)
-   {  String info = null;
+   { 
       if (amount >= balance) {
       System.out.println("You don't have enough balance");
    } else {
       this.balance -= amount;
-      newTransaction(amount, "Withdraw", info);
+      newTransaction(amount, "n/a", "Withdraw");
       }
    }
    
-   public void transfer(double amount, String recipientAccountName, String info) {
-      BankAccount sourceAccount = account;
-      BankAccount recipientAccount = account2.getName();
-  
-      // Find the source and recipient accounts in AccList
-      for (BankAccount account : AccList) {
-          if (account.getName().equals(account.getName())) {
-              sourceAccount = account;
-          } else if (account.getName().equals(recipientAccountName)) {
-              recipientAccount = account;
-          }
-      }
-  
+   public void transfer(double amount, BankAccount recipient, String info) {
+
       // Perform the transfer if both accounts are found
-      if (sourceAccount != null && recipientAccount != null) {
+      // if (recipientAccount != null) {
           // Withdraw from the source account
-          sourceAccount.withdraw(amount);
+          if (amount >= this.balance) {
+         System.out.println("You don't have enough balance");
+           } else {
+            this.balance -= amount;
+
+         }
           // Deposit into the recipient account
-          recipientAccount.deposit(amount);
+          recipient.deposit(amount);
   
           // Log the transaction
-          newTransaction(amount, "Transfer", info);
+          newTransaction(amount, info, "Transfer");
   
           System.out.println("Successful Transfer");
-      } else {
-          System.out.println("Cannot Transfer. Source or recipient account not found.");
-      }
+      // } else {
+      //     System.out.println("Cannot Transfer. Source or recipient account not found.");
+      // }
   }
 
    public String getName() {
@@ -88,13 +82,13 @@ class BankAccount
       AccList.add(new BankAccount(balance, name));
    }
 
-   private void newTransaction(double amount, String type, String info){
+   private void newTransaction(double amount, String info, String type){
       SimpleDateFormat form = new SimpleDateFormat("MM-dd-yyyy hh:mm");
       String date = form.format(new Date());
-      BTlist.add(new BankTransaction(date, type, amount, balance, info));
+      BTlist.add(new BankTransaction(date, type, balance, amount, info));
 
       for (BankTransaction bt : BTlist){
-      try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt", true))) {
+      try (BufferedWriter writer = new BufferedWriter(new FileWriter("history.txt", true))) {
          // Writing data to the file
          String line = bt.toString();
          writer.newLine();
@@ -111,7 +105,7 @@ class BankAccount
    public void printTabungan(){  
 
    System.out.println("--------------");
-   System.out.printf("%-20s %-10s %-10s %-15s %-20s", "Date", "Amount", "Balance", "Type", "Information");
+   // System.out.printf("%-20s %-10s %-10s %-15s %-20s", "Date", "Amount", "Balance", "Type", "Information");
       for (BankTransaction bt : BTlist)
     { 
       try (BufferedReader reader = new BufferedReader(new FileReader("history.txt"))) {
