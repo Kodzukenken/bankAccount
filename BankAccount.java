@@ -25,18 +25,26 @@ class BankAccount
       // newTransaction("Create Acc", initialBalance);
    }
 
-   public void deposit(double amount){
+   public void deposit(double amount, String info){
       balance = balance + amount;
       // BTlist.add(new BankTransaction("deposit", amount, balance));
-      newTransaction(amount, "Deposit");
+      newTransaction(amount, "Deposit", info);
    } 
 
-   public void withdraw(double amount)
+   public void withdraw(double amount, String info)
    { if (amount >= balance) {
       System.out.println("You don't have enough balance");
    } else {
       balance = balance - amount;
-      newTransaction(amount, "Withdraw");
+      newTransaction(amount, "Withdraw", info);
+      }
+   }
+
+   public void transfer(double amount, BankAccount account){
+      if(amount <= this.balance){
+         this.balance = balance - amount;
+      } else{
+         System.out.println("You don't have enough balance");
       }
    }
 
@@ -52,10 +60,10 @@ class BankAccount
       return balance;
    }
 
-   private void newTransaction(double amount, String type){
+   private void newTransaction(double amount, String type, String info){
       SimpleDateFormat form = new SimpleDateFormat("MM-dd-yyyy hh:mm");
       String date = form.format(new Date());
-      BTlist.add(new BankTransaction(date, type, amount, balance));
+      BTlist.add(new BankTransaction(date, type, amount, balance, info));
 
       for (BankTransaction bt : BTlist){
       try (BufferedWriter writer = new BufferedWriter(new FileWriter("history.txt", true))) {
@@ -74,7 +82,7 @@ class BankAccount
 
    public void printTabungan(){  
 
-      System.out.printf("%-20s %-10s %-10s %-15s%n", "Date", "Amount", "Balance", "Type");
+      System.out.printf("%-20s %-10s %-10s %-15s%n", "Date", "Amount", "Balance", "Type", "Information");
    System.out.println("--------------");
       for (BankTransaction bt : BTlist)
     { 

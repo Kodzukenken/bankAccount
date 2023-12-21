@@ -18,14 +18,15 @@ public class BankAccountTester{
       
 
       do{ 
-         System.out.println("--------------"); 
+         System.out.println("\n--------------"); 
          System.out.println("Menu");
          System.out.println("--------------");
          System.out.println("1. Create an account");
          System.out.println("2. Deposit");
          System.out.println("3. Withdraw");
-         System.out.println("4. Display Bank Book Transaction");
-         System.out.println("5. Exit");
+         System.out.println("4. Display bank Book Transaction");
+         System.out.println("5. Transfer to another account");
+         System.out.println("6. Exit");
          System.out.println("--------------");
          opt = button.nextInt();
 
@@ -53,13 +54,16 @@ public class BankAccountTester{
             acc.withdraw(amt);
       break;
          case 4:
+         
+      break;
+         case 5:
          //Printing transaction history
             acc.printTabungan();
       break;
          default:
          ;
       }
-      }while (opt != 5 || opt >5 || opt < 1);
+      }while (opt != 6 || opt >6 || opt < 1);
 
 
    }
