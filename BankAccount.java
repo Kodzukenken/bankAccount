@@ -12,40 +12,47 @@ class BankAccount
    private String name;
    private double balance;
    private String address;
-   private ArrayList<BankTransaction> BTlist = new  ArrayList<BankTransaction>() ;
+   private ArrayList<BankTransaction> BTlist = new  ArrayList<BankTransaction>();
+   private ArrayList<BankAccount> AccList = new ArrayList<BankAccount>();
    public BankAccount()
    {   
       balance = 0;
    } 
 
-   public BankAccount(double initialBalance, String name, String address)
+   public BankAccount(double initialBalance, String name)
    {  this.name = name;
-      this.address = address;
       this.balance = initialBalance;
-      // newTransaction("Create Acc", initialBalance);
    }
 
-   public void deposit(double amount, String info){
-      balance = balance + amount;
-      // BTlist.add(new BankTransaction("deposit", amount, balance));
+   public void create(String name, double initialBalance){
+
+   }
+
+   public void deposit(double amount){
+      String info = null;
+      this.balance += amount;
       newTransaction(amount, "Deposit", info);
    } 
 
-   public void withdraw(double amount, String info)
-   { if (amount >= balance) {
+   public void withdraw(double amount)
+   {  String info = null;
+      if (amount >= balance) {
       System.out.println("You don't have enough balance");
    } else {
-      balance = balance - amount;
+      this.balance -= amount;
       newTransaction(amount, "Withdraw", info);
       }
    }
 
-   public void transfer(double amount, BankAccount account){
+   public void transfer(double amount, String name2, String info){
       if(amount <= this.balance){
-         this.balance = balance - amount;
+         this.balance -= amount;
+         name2.balance += amount;
+         System.out.println("Transaction Successful");
       } else{
          System.out.println("You don't have enough balance");
       }
+      newTransaction(amount, "Transfer", info);
    }
 
    public String getName() {
@@ -58,6 +65,10 @@ class BankAccount
 
    public double getBalance(){   
       return balance;
+   }
+
+   public static void addAccount(String name, double balance){
+      AccList.add(new BankAccount(balance, name));
    }
 
    private void newTransaction(double amount, String type, String info){

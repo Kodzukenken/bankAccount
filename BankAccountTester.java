@@ -4,18 +4,16 @@ public class BankAccountTester{
    public static void main(String[] args){   
 
       int opt, amt;
-      String name, address;
+      String name, info;
 
       Scanner button = new Scanner(System.in);
 
       System.out.println("Please enter your name: ");
       name = button.nextLine();
-      System.out.println("Please enter address: ");
-      address = button.nextLine();
       System.out.println("Enter your initial balance: ");
       amt = button.nextInt();
-      BankAccount acc = new BankAccount(amt, name, address); 
-      
+      BankAccount acc = new BankAccount(amt, name);
+      acc.addAccount(name, amt);
 
       do{ 
          System.out.println("\n--------------"); 
@@ -35,11 +33,9 @@ public class BankAccountTester{
          //Creating an account
             System.out.println("Please enter your name: ");
             name = button.nextLine();
-            System.out.println("Please enter address: ");
-            address = button.nextLine();
             System.out.println("Enter your initial balance: ");
             amt = button.nextInt();
-            BankAccount newAcc = new BankAccount(amt, name, address); 
+            BankAccount cust2 = new BankAccount(amt, name);
       break;
          case 2:
          // Deposit
@@ -54,7 +50,15 @@ public class BankAccountTester{
             acc.withdraw(amt);
       break;
          case 4:
-         
+         System.out.println("Please enter the recipient account: ");
+         name = button.nextLine();
+         System.out.println("Please enter amount to transfer: ");
+         amt = button.nextInt();
+         System.out.println("Please enter transfer information: ");
+         info = button.nextLine();
+
+         acc.transfer(amt, cust2, info);
+
       break;
          case 5:
          //Printing transaction history
